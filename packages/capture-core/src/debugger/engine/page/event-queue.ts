@@ -20,6 +20,16 @@ export function createEventQueue(
       return
     }
 
+    // The flush is deferred (setTimeout), so it can run after the page it was
+    // scheduled for is gone: a torn-down test environment, an SSR/worker
+    // context, or a tab unloaded before the timer fired. There is no window to
+    // postMessage to, so drop the batch instead of throwing a bare-`window`
+    // ReferenceError out of an unowned timer callback.
+    if (typeof window === "undefined") {
+      eventQueue.length = 0
+      return
+    }
+
     const batchedEvents = eventQueue.splice(0, MAX_BATCH_SIZE)
     recordFlushedBatch?.()
 

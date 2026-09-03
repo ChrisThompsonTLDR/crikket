@@ -16,14 +16,21 @@ export const scheduleBackgroundTask = (
     })
   }
 
-  if (typeof window.requestIdleCallback === "function") {
+  // Deferred like the flush above, so it must not assume a live page. Prefer the
+  // page's idle callback when there is a window, but fall back to the ambient
+  // timer so a task queued as the environment is torn down (tests/SSR) still
+  // drains without a bare-`window` ReferenceError.
+  if (
+    typeof window !== "undefined" &&
+    typeof window.requestIdleCallback === "function"
+  ) {
     window.requestIdleCallback(() => {
       executeTask()
     })
     return
   }
 
-  window.setTimeout(executeTask, 0)
+  setTimeout(executeTask, 0)
 }
 
 export const getRequestBodyPreviewAsync = (
