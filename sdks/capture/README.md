@@ -91,6 +91,15 @@ Available options:
   instead of on first capture, so requests made before the widget is opened are
   included in reports. Defaults to `true`.
 
+### Mobile browsers
+
+Screen capture (`getDisplayMedia`) is a desktop-only web feature — no mobile
+browser implements it. On mobile the widget automatically offers an **Upload
+Screenshot** path instead of Record/Screenshot, so a user can attach an
+OS screenshot; console, network, URL and device context are still collected.
+You can also drive this programmatically with
+`attachScreenshotFile(file: Blob)`.
+
 `submitPath` is used as the base path for the capture control-plane flow. By
 default the SDK derives these routes from `/api/embed/bug-reports`:
 
