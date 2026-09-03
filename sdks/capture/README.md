@@ -87,6 +87,9 @@ Available options:
 - `onOpen` / `onClose`: callbacks fired when the capture dialog opens/closes.
   Useful for pausing app-level keyboard shortcuts while someone is typing a
   report. `isOpen()` is also exported.
+- `collectDebuggerEagerly`: install the network/console recorder at `init()`
+  instead of on first capture, so requests made before the widget is opened are
+  included in reports. Defaults to `true`.
 
 `submitPath` is used as the base path for the capture control-plane flow. By
 default the SDK derives these routes from `/api/embed/bug-reports`:

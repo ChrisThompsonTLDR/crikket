@@ -21,6 +21,7 @@ export function CapturePlugin(
     const lifecycleVersion = lifecycleVersionRef.current
     const controller = init({
       autoMount: props.autoMount,
+      collectDebuggerEagerly: props.collectDebuggerEagerly,
       host: props.host,
       key: normalizedKey,
       launcher: props.launcher,
@@ -43,6 +44,7 @@ export function CapturePlugin(
     }
   }, [
     props.autoMount,
+    props.collectDebuggerEagerly,
     props.host,
     props.launcher,
     props.mountTarget,

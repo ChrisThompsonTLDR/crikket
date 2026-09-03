@@ -106,6 +106,12 @@ export interface CaptureInitOptions {
   onOpen?: () => void
   /** Called when the capture dialog closes. */
   onClose?: () => void
+  /**
+   * Install the network/console debugger at init() instead of on first
+   * capture, so requests made before the user opens the widget are captured.
+   * Defaults to true.
+   */
+  collectDebuggerEagerly?: boolean
 }
 
 export interface CaptureRuntimeConfig {
